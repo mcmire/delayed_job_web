@@ -8,13 +8,13 @@
   %tr
     %th.status
       failed
-    %th= delayed_jobs(:failed).count
+    %th= count_all_jobs(:failed)
   %tr
     %th.status
       pending
-    %th= delayed_jobs(:pending).count
+    %th= count_all_jobs(:pending)
   %tr
     %th.status
       working
-    %th= delayed_jobs(:working).count
+    %th= count_all_jobs(:working)
 = poll

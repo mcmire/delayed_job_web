@@ -66,35 +66,84 @@ class DelayedJobWeb < Sinatra::Base
 
   %w(enqueued working pending failed).each do |page|
     get "/#{page}" do
-      @jobs = delayed_jobs(page.to_sym).order('created_at desc, id desc').offset(start).limit(per_page)
-      @all_jobs = delayed_jobs(page.to_sym)
+      @jobs = find_all_jobs(page.to_sym,
+        :order => 'created_at desc, id desc',
+        :offset => start,
+        :limit => per_page
+      )
+      @all_jobs = find_all_jobs(page.to_sym)
       haml page.to_sym
     end
   end
 
   get "/remove/:id" do
-    delayed_job.find(params[:id]).delete
+    remove_job(params[:id])
     redirect back
   end
 
   get "/requeue/:id" do
-    job = delayed_job.find(params[:id])
-    job.update_attributes(:run_at => Time.now, :failed_at => nil)
+    update_job(params[:id], :run_at => Time.now, :failed_at => nil)
     redirect back
   end
 
   post "/failed/clear" do
-    delayed_job.destroy_all(delayed_job_sql(:failed))
+    remove_jobs(:failed)
     redirect u('failed')
   end
 
   post "/requeue/all" do
-    delayed_jobs(:failed).update_all(:run_at => Time.now, :failed_at => nil)
+    requeue_failed_jobs
     redirect back
   end
 
-  def delayed_jobs(type)
-    delayed_job.where(delayed_job_sql(type))
+  def find_all_jobs(type, opts={})
+    conditions = delayed_job_sql(type)
+    if Rails.version.to_s =~ /^2/
+      delayed_job.find(:all, {:conditions => conditions}.merge(opts))
+    else
+      scope = delayed_job.where(conditions)
+      scope.order(opts[:order]) if opts[:order]
+      scope.offset(opts[:offset]) if opts[:offset]
+      scope.limit(opts[:limit]) if opts[:limit]
+      scope
+    end
+  end
+
+  def count_all_jobs(type=nil)
+    if type.nil?
+      return delayed_job.count
+    end
+    if Rails.version.to_s =~ /^2/
+      delayed_job.count(:conditions => delayed_job_sql(type))
+    else
+      find_all_jobs(type).count
+    end
+  end
+
+  def find_job(id)
+    delayed_job.find(id)
+  end
+
+  def update_job(id, attrs)
+    job = find_job(id)
+    job.update_attributes(attrs)
+  end
+
+  def remove_job(id)
+    find_job(id).delete
+  end
+
+  def remove_jobs(type)
+    delayed_job.destroy_all(delayed_job_sql(type))
+  end
+
+  def requeue_failed_jobs
+    updates = {:run_at => Time.now, :failed_at => nil}
+    if Rails.version.to_s =~ /^2/
+      delayed_job.update_all(updates, delayed_job_sql(:failed))
+    else
+      find_all_jobs(:failed).update_all(updates)
+    end
   end
 
   def delayed_job_sql(type)

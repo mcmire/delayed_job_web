@@ -20,7 +20,7 @@ Jeweler::Tasks.new do |gem|
   gem.summary = "Web interface for delayed_job"
   gem.description = "Web interface for delayed_job inspired by resque"
   gem.email = "ejschmitt@gmail.com"
-  gem.authors = ["Erick Schmitt"]
+  gem.authors = ["Erick Schmitt", "Elliot Winkler"]
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
