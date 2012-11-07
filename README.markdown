@@ -43,6 +43,51 @@ if Rails.env.production?
 end
 ```
 
+For Rails 2.x Applications
+--------------------------
+
+Yes, this works for older Rails apps too, but you have to do some extra work.
+
+First, in starting your app you will have to go outside of the Rails framework a
+bit. Rails 2.x doesn't have the concept of mountable apps, but Rack does. So
+if you want to access the DelayedJob interface, you'll need to start your app
+Rack-style.
+
+First begin by adding a config.ru file that looks something like this:
+
+```ruby
+require File.dirname(__FILE__) + '/config/environment'
+
+# I don't know why this doesn't automatically happen
+Delayed::Worker.guess_backend
+Delayed::Job
+
+if Rails.env.production?
+  DelayedJobWeb.use Rack::Auth::Basic do |username, password|
+    username == 'username' && password == 'password'
+  end
+end
+
+app = Rack::Builder.new {
+  use Rails::Rack::Static
+
+  map "/delayed_jobs" do
+    run DelayedJobWeb.new
+  end
+
+  map "/" do
+    run ActionController::Dispatcher.new
+  end
+}.to_app
+
+run app
+```
+
+Now to run your Rails app, use `rackup` instead of `script/server`. In
+production, you will obviously want to make sure whatever you are using to run
+your app does this as well. (Passenger does by default.)
+
+
 The Interface - Yea, a ripoff of resque-web
 ------------------------------------
 
