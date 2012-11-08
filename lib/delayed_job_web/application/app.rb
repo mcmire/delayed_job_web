@@ -35,9 +35,8 @@ class DelayedJobWeb < Sinatra::Base
   def tabs
     [
       {:name => 'Overview', :path => '/overview'},
-      {:name => 'Enqueued', :path => '/enqueued'},
-      {:name => 'Working', :path => '/working'},
       {:name => 'Pending', :path => '/pending'},
+      {:name => 'Working', :path => '/working'},
       {:name => 'Failed', :path => '/failed'},
       {:name => 'Stats', :path => '/stats'}
     ]
@@ -149,7 +148,7 @@ class DelayedJobWeb < Sinatra::Base
   def delayed_job_sql(type)
     case type
     when :enqueued
-      ''
+      'run_at is null or (run_at is not null and last_error is null)'
     when :working
       'locked_at is not null'
     when :failed

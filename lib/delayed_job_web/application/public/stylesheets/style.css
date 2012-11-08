@@ -36,9 +36,9 @@ pre { font-family:Courier New; line-height:1.4em; }
 
 #main table.overview { width:40%;}
 #main table.overview td.status { font-weight:bold; width:50%;}
-#main table.overview tr.failed td { border-top:2px solid; font-size:90%; }
-#main table.overview tr.failure td { background:#ffecec; border-top:2px solid #d37474; font-size:90%; color:#d37474;}
-#main table.overview tr.failure td a{ color:#d37474;}
+#main table.overview tr.failed td { border-top:2px solid; }
+#main table.overview tr.failure td { background:#ffecec; color:#E03434; }
+#main table.overview tr.failure td a{ color:#E03434; }
 
 #main table.jobs td.class { font-family:Monaco, "Courier New", monospace; font-size:90%; width:50%;}
 #main table.jobs td.args{ width:50%;}
