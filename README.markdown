@@ -1,9 +1,9 @@
 About this Fork
 ===============
 
-This fork by @mcmire adds Rails 2.x support, and also removes the "enqueued" tab
-from the UI (because I didn't see a need for it). I also updated the README
-below.
+This fork by [@mcmire][2] adds Rails 2.x support, and also removes the
+"enqueued" tab from the UI (because I didn't see a need for it). I also updated
+the README below.
 
 ---
 
@@ -112,3 +112,4 @@ Erick Schmitt - [@ejschmitt][1]
 
 [0]: https://github.com/defunkt/resque
 [1]: http://twitter.com/ejschmitt
+[2]: http://github.com/mcmire
