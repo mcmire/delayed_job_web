@@ -4,12 +4,12 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{delayed_job_web}
+  s.name = %q{mcmire-delayed_job_web}
   s.version = "1.1.3.rc1"
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["Erick Schmitt", "Elliot Winkler"]
-  s.date = %q{2012-11-06}
+  s.date = %q{2012-11-11}
   s.default_executable = %q{delayed_job_web}
   s.description = %q{Web interface for delayed_job inspired by resque}
   s.email = %q{ejschmitt@gmail.com}
