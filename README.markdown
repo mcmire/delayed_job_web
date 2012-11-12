@@ -1,16 +1,23 @@
+About this Fork
+===============
+
+This fork by @mcmire adds Rails 2.x support, and also removes the "enqueued" tab
+from the UI (because I didn't see a need for it). I also updated the README
+below.
+
+---
+
 delayed_job_web
 ===============
 
-A [resque][0] inspired (read: stolen) interface for delayed_job.
-This gem is written to work with rails 3 applications using
-activerecord.
+A [resque][0] inspired (read: stolen) interface for delayed_job. This gem is
+written to work with Rails 2 and 3 applications using activerecord.
 
 Some features:
 
-* Easily view jobs enqueued, working, pending, and failed.
-* Queue any single job. or all pending jobs, to run immediately.
+* Easily view pending, working, and failed jobs.
+* Queue any single job, or all pending jobs, to run immediately.
 * Remove a failed job, or easily remove all failed jobs.
-* Watch delayed_job operation with live ajax polling.
 
 Quick Start For Rails 3 Applications
 ------------------------------------
@@ -33,7 +40,8 @@ Add a route to your application for accessing the interface
 match "/delayed_job" => DelayedJobWeb, :anchor => false
 ```
 
-You probably want to password protect the interface, an easy way is to add something like this your config.ru file
+You probably want to password protect the interface, an easy way is to add
+something like this your config.ru file
 
 ```ruby
 if Rails.env.production?
@@ -43,10 +51,11 @@ if Rails.env.production?
 end
 ```
 
-For Rails 2.x Applications
---------------------------
+Quick Start For Rails 2.x Applications
+--------------------------------------
 
-Yes, this works for older Rails apps too, but you have to do some extra work.
+Yes, this works for older Rails apps too, but it requires a little bit of extra
+work.
 
 First, in starting your app you will have to go outside of the Rails framework a
 bit. Rails 2.x doesn't have the concept of mountable apps, but Rack does. So
@@ -58,9 +67,8 @@ First begin by adding a config.ru file that looks something like this:
 ```ruby
 require File.dirname(__FILE__) + '/config/environment'
 
-# I don't know why this doesn't automatically happen
+# For some reason this doesn't happen automatically anymore
 Delayed::Worker.guess_backend
-Delayed::Job
 
 if Rails.env.production?
   DelayedJobWeb.use Rack::Auth::Basic do |username, password|

@@ -14,7 +14,7 @@ require 'rake'
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
-  gem.name = "delayed_job_web"
+  gem.name = "mcmire-delayed_job_web"
   gem.homepage = "http://github.com/ejschmitt/delayed_job_web"
   gem.license = "MIT"
   gem.summary = "Web interface for delayed_job"
