@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{mcmire-delayed_job_web}
-  s.version = "1.1.3.rc1"
+  s.version = "1.1.3.rc2"
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["Erick Schmitt", "Elliot Winkler"]
@@ -26,7 +26,6 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "bin/delayed_job_web",
-    "delayed_job_web.gemspec",
     "lib/delayed_job_web.rb",
     "lib/delayed_job_web/application/app.rb",
     "lib/delayed_job_web/application/public/images/poll.png",
@@ -45,6 +44,7 @@ Gem::Specification.new do |s|
     "lib/delayed_job_web/application/views/pending.haml",
     "lib/delayed_job_web/application/views/stats.haml",
     "lib/delayed_job_web/application/views/working.haml",
+    "mcmire-delayed_job_web.gemspec",
     "test/helper.rb",
     "test/test_delayed_job_web.rb"
   ]
