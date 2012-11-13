@@ -1,9 +1,9 @@
 %h1
-  Enqueued
+  All Jobs
 %p.sub
-  The list below contains all jobs currently in the delayed_job queue.
+  The list below contains all jobs which are in the delayed_jobs table.
 %p.sub
-  = "Showing #{start} to #{start + per_page} of #{@all_jobs.count} enqueued jobs."
+  = "Showing #{start} to #{start + per_page} of #{@all_jobs.count} jobs."
 %ul.job
   - @jobs.each do |job|
     = partial :job, {:job => job}

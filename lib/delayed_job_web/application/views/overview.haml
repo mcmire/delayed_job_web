@@ -1,15 +1,12 @@
 %h1
   Overview
 %p.sub
-  The list below shows an overview of the jobs in the delayed_job queue.
+  The table below gives the state of all jobs in the delayed_jobs table broken
+  down by status.
 %table.overview
   %tr
     %th Status
     %th Count
-  %tr
-    %td.status
-      %a{:href => u('/enqueued')} Enqueued Jobs
-    %td= count_all_jobs
   %tr
     %td.status
       %a{:href => u('/working')} Working Jobs
@@ -22,4 +19,8 @@
     %td.status
       %a{:href => u('/failed')} Failed Jobs
     %td= count_all_jobs(:failed)
+  %tr.all
+    %td.status
+      %a{:href => u('/enqueued')} All Jobs
+    %td= count_all_jobs
 = poll

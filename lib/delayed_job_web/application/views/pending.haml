@@ -4,7 +4,7 @@
   %form{:method => 'POST', :action => u('requeue/all')}
     %input{:type => 'submit', :value => 'Enqueue All Immediately'}
 %p.sub
-  The list below contains jobs currently being processed.
+  The list below contains jobs which are waiting to be processed.
 %p.sub= "Showing #{start} to #{start + per_page} of #{@all_jobs.count} pending jobs."
 %ul.job
   - @jobs.each do |job|
