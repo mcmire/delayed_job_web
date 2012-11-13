@@ -1,7 +1,7 @@
 %h1 Failed Jobs
 - if @jobs.any?
   %form{:method => 'POST', :action => u('failed/clear')}
-    %input{:type => 'submit', :value => 'Clear Failed Jobs'}
+    %input{:type => 'submit', :value => 'Clear Failed Jobs', :class => 'btn confirm', :'data-message' => 'Are you sure you want to clear all failed jobs? This cannot be undone.'}
   %form{:method => 'POST', :action => u('requeue/all')}
     %input{:type => 'submit', :value => 'Retry Failed Jobs'}
 

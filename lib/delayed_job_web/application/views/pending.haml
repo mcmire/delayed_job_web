@@ -2,9 +2,9 @@
   Pending
 - if @jobs.any?
   %form{:method => 'POST', :action => u('requeue/all')}
-    %input{:type => 'submit', :value => 'Enqueue All Immediately'}
+    %input{:type => 'submit', :value => 'Re-enqueue Pending Jobs'}
 %p.sub
-  The list below contains jobs which are waiting to be processed.
+  The list below contains jobs which are waiting to be run.
 %p.sub= "Showing #{start} to #{start + per_page} of #{@all_jobs.count} pending jobs."
 %ul.job
   - @jobs.each do |job|
