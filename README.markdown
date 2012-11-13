@@ -1,9 +1,8 @@
-About this Fork
+About This Fork
 ===============
 
-This fork by [@mcmire][2] adds Rails 2.x support, and also removes the
-"enqueued" tab from the UI (because I didn't see a need for it). I also updated
-the README below.
+This fork by [@mcmire][2] adds Rails 2.x support, and also repurposes the
+"enqueued" tab as an "all jobs" tab. I also updated the README below.
 
 ---
 
@@ -15,33 +14,33 @@ written to work with Rails 2 and 3 applications using activerecord.
 
 Some features:
 
-* Easily view pending, working, and failed jobs.
+* Easily view pending, working, failed, and all jobs.
 * Queue any single job, or all pending jobs, to run immediately.
 * Remove a failed job, or easily remove all failed jobs.
 
 Quick Start For Rails 3 Applications
 ------------------------------------
 
-Add the dependency to your Gemfile
+Add the dependency to your Gemfile:
 
 ```ruby
 gem "delayed_job_web"
 ```
 
-Install it...
+Install it:
 
 ```ruby
 bundle
 ```
 
-Add a route to your application for accessing the interface
+Add a route to your application for accessing the interface:
 
 ```ruby
-match "/delayed_job" => DelayedJobWeb, :anchor => false
+mount DelayedJobWeb => '/delayed_job'
 ```
 
-You probably want to password protect the interface, an easy way is to add
-something like this your config.ru file
+Finally, you'll probably want to password-protect the interface. An easy way to
+do this is to add something like this to your config.ru file:
 
 ```ruby
 if Rails.env.production?
