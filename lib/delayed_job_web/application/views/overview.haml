@@ -1,17 +1,23 @@
 %h1
   Overview
+%p.sub
+  The list below shows an overview of the jobs in the delayed_job queue.
 %table.overview
   %tr
     %th Status
     %th Count
   %tr
     %td.status
-      %a{:href => u('/pending')} Pending Jobs
-    %td= count_all_jobs(:pending)
+      %a{:href => u('/enqueued')} Enqueued Jobs
+    %td= count_all_jobs
   %tr
     %td.status
       %a{:href => u('/working')} Working Jobs
     %td= count_all_jobs(:working)
+  %tr
+    %td.status
+      %a{:href => u('/pending')} Pending Jobs
+    %td= count_all_jobs(:pending)
   %tr{:class => count_all_jobs(:failed) > 0 ? 'failure' : ''}
     %td.status
       %a{:href => u('/failed')} Failed Jobs
