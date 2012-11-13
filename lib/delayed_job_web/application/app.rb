@@ -96,6 +96,11 @@ class DelayedJobWeb < Sinatra::Base
     redirect back
   end
 
+  post "/clear" do
+    remove_jobs
+    redirect back
+  end
+
   def find_all_jobs(type, opts={})
     conditions = delayed_job_sql(type)
     if Rails.version.to_s =~ /^2/
@@ -133,8 +138,12 @@ class DelayedJobWeb < Sinatra::Base
     find_job(id).delete
   end
 
-  def remove_jobs(type)
-    delayed_job.destroy_all(delayed_job_sql(type))
+  def remove_jobs(type=nil)
+    if type
+      delayed_job.destroy_all(delayed_job_sql(type))
+    else
+      delayed_job.destroy_all
+    end
   end
 
   def requeue_failed_jobs

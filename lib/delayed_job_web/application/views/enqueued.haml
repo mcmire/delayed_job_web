@@ -1,5 +1,7 @@
-%h1
-  All Jobs
+%h1 All Jobs
+- if @jobs.any?
+  %form{:method => 'POST', :action => u('clear')}
+    %input{:type => 'submit', :value => 'Clear All Jobs', :class => 'btn confirm', :'data-message' => 'Are you sure you want to clear all jobs? This cannot be undone.'}
 %p.sub
   The list below contains all jobs which are in the delayed_jobs table.
 %p.sub
